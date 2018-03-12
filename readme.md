@@ -30,6 +30,8 @@
 2. From the projects root folder run `yarn run dev` or `yarn run production`
   * You can watch assets with `yarn run watch`
 
+###### And thats it with the caveat of setting up and configuring your development environment. I recommend [Laravel Homestead](https://laravel.com/docs/5.6/homestead)
+
 ### Notes
 If you receive file_put_content errors you may need to check that your `storage` and `bootstrap/cache` folders writable.
 These can be done with:

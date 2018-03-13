@@ -38,7 +38,7 @@
 If you receive file_put_content errors you may need to check that your `storage` and `bootstrap/cache` folders writable.
 These can be done with:
 
-1. From the projects root folder run `sudo chmod -R 755 storage bootstra/cache`
+1. From the projects root folder run `sudo chmod -R 755 storage bootstrap/cache`
 2. From the projects root folder run `sudo chwon -R $USER:staff ../laravel.local`
     - Note: You may need to change `$USER:staff` to your web user and group.
 

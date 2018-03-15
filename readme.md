@@ -5,6 +5,7 @@
 - [Installation Instructions](#installation-instructions)
     - [Build the Front End Assets with Mix](#build-the-front-end-assets-with-mix)
 - [Notes](#notes)
+- [Routes](#routes)
 - [File Tree](#file-tree)
 - [License](#license)
 
@@ -42,6 +43,25 @@ These can be done with:
 2. From the projects root folder run `sudo chwon -R $USER:staff ../laravel.local`
     - Note: You may need to change `$USER:staff` to your web user and group.
 
+### Routes
+```
++--------+----------+------------------------+-------------------------+-----------------------------------------------------------------------------------+--------------+
+| Domain | Method   | URI                    | Name                    | Action                                                                            | Middleware   |
++--------+----------+------------------------+-------------------------+-----------------------------------------------------------------------------------+--------------+
+|        | GET|HEAD | /                      |                         | Closure                                                                           | web          |
+|        | GET|HEAD | api/user               |                         | Closure                                                                           | api,auth:api |
+|        | GET|HEAD | home                   | home                    | App\Http\Controllers\HomeController@index                                         | web,auth     |
+|        | GET|HEAD | login                  | login                   | App\Http\Controllers\Auth\LoginController@showLoginForm                           | web,guest    |
+|        | POST     | login                  |                         | App\Http\Controllers\Auth\LoginController@login                                   | web,guest    |
+|        | POST     | logout                 | logout                  | App\Http\Controllers\Auth\LoginController@logout                                  | web          |
+|        | POST     | password/email         | password.email          | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail             | web,guest    |
+|        | GET|HEAD | password/reset         | password.request        | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm            | web,guest    |
+|        | POST     | password/reset         |                         | App\Http\Controllers\Auth\ResetPasswordController@reset                           | web,guest    |
+|        | GET|HEAD | password/reset/{token} | password.reset          | App\Http\Controllers\Auth\ResetPasswordController@showResetForm                   | web,guest    |
+|        | GET|HEAD | register               | register                | App\Http\Controllers\Auth\RegisterController@showRegistrationForm                 | web,guest    |
+|        | POST     | register               |                         | App\Http\Controllers\Auth\RegisterController@register                             | web,guest    |
++--------+----------+------------------------+-------------------------+-----------------------------------------------------------------------------------+--------------+
+```
 
 ### File Tree
 ```

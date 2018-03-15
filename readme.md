@@ -1,5 +1,8 @@
 ## Laravel.local
-#### An out the box Laravel 5.6 installation with authenticaion scaffolding in place. All factory Laravel. This is for example purposes.
+#### An out the box Laravel 5.6 installation with authenticaion scaffolding in place. This is for example purposes.
+##### Important Notes:
+* Currently using for laravel-roles [reported issue](https://github.com/jeremykenedy/laravel-roles/issues/10#issuecomment-373195472) tested.
+* A demo of [attching roles](https://github.com/jeremykenedy/laravel-roles#attaching-detaching-and-syncing-permissions )
 
 #### Table of contents
 - [Installation Instructions](#installation-instructions)
@@ -18,9 +21,15 @@
 3. From the projects root run `cp .env.example .env`
 4. Configure your `.env` file
 5. Run `composer update` from the projects root folder
-6. From the projects root folder run `php artisan key:generate`
-7. From the projects root folder run `php artisan migrate`
-8. Compile the front end assets with [npm steps](#using-npm) or [yarn steps](#using-yarn).
+6. From the projects root folder run:
+```
+php artisan vendor:publish --tag=laravelroles && php artisan vendor:publish --tag=laravelusers
+```
+7. From the projects root folder run `php artisan key:generate`
+8. From the projects root folder run `php artisan migrate`
+9. From the projects root folder run `composer dump-autoload`
+10. From the projects root folder run `php artisan db:seed`
+11. Compile the front end assets with [npm steps](#using-npm) or [yarn steps](#using-yarn).
 
 #### Build the Front End Assets with Mix
 ##### Using NPM:
@@ -45,22 +54,30 @@ These can be done with:
 
 ### Routes
 ```
-+--------+----------+------------------------+-------------------------+-----------------------------------------------------------------------------------+--------------+
-| Domain | Method   | URI                    | Name                    | Action                                                                            | Middleware   |
-+--------+----------+------------------------+-------------------------+-----------------------------------------------------------------------------------+--------------+
-|        | GET|HEAD | /                      |                         | Closure                                                                           | web          |
-|        | GET|HEAD | api/user               |                         | Closure                                                                           | api,auth:api |
-|        | GET|HEAD | home                   | home                    | App\Http\Controllers\HomeController@index                                         | web,auth     |
-|        | GET|HEAD | login                  | login                   | App\Http\Controllers\Auth\LoginController@showLoginForm                           | web,guest    |
-|        | POST     | login                  |                         | App\Http\Controllers\Auth\LoginController@login                                   | web,guest    |
-|        | POST     | logout                 | logout                  | App\Http\Controllers\Auth\LoginController@logout                                  | web          |
-|        | POST     | password/email         | password.email          | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail             | web,guest    |
-|        | GET|HEAD | password/reset         | password.request        | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm            | web,guest    |
-|        | POST     | password/reset         |                         | App\Http\Controllers\Auth\ResetPasswordController@reset                           | web,guest    |
-|        | GET|HEAD | password/reset/{token} | password.reset          | App\Http\Controllers\Auth\ResetPasswordController@showResetForm                   | web,guest    |
-|        | GET|HEAD | register               | register                | App\Http\Controllers\Auth\RegisterController@showRegistrationForm                 | web,guest    |
-|        | POST     | register               |                         | App\Http\Controllers\Auth\RegisterController@register                             | web,guest    |
-+--------+----------+------------------------+-------------------------+-----------------------------------------------------------------------------------+--------------+
++--------+-----------+------------------------+------------------+----------------------------------------------------------------------------------+--------------+
+| Domain | Method    | URI                    | Name             | Action                                                                           | Middleware   |
++--------+-----------+------------------------+------------------+----------------------------------------------------------------------------------+--------------+
+|        | GET|HEAD  | /                      |                  | Closure                                                                          | web          |
+|        | GET|HEAD  | api/user               |                  | Closure                                                                          | api,auth:api |
+|        | GET|HEAD  | home                   | home             | App\Http\Controllers\HomeController@index                                        | web,auth     |
+|        | POST      | login                  |                  | App\Http\Controllers\Auth\LoginController@login                                  | web,guest    |
+|        | GET|HEAD  | login                  | login            | App\Http\Controllers\Auth\LoginController@showLoginForm                          | web,guest    |
+|        | POST      | logout                 | logout           | App\Http\Controllers\Auth\LoginController@logout                                 | web          |
+|        | POST      | password/email         | password.email   | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail            | web,guest    |
+|        | GET|HEAD  | password/reset         | password.request | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm           | web,guest    |
+|        | POST      | password/reset         |                  | App\Http\Controllers\Auth\ResetPasswordController@reset                          | web,guest    |
+|        | GET|HEAD  | password/reset/{token} | password.reset   | App\Http\Controllers\Auth\ResetPasswordController@showResetForm                  | web,guest    |
+|        | GET|HEAD  | register               | register         | App\Http\Controllers\Auth\RegisterController@showRegistrationForm                | web,guest    |
+|        | POST      | register               |                  | App\Http\Controllers\Auth\RegisterController@register                            | web,guest    |
+|        | POST      | search-users           | search-users     | jeremykenedy\laravelusers\app\Http\Controllers\UsersManagementController@search  | web,auth     |
+|        | POST      | users                  | users.store      | jeremykenedy\laravelusers\app\Http\Controllers\UsersManagementController@store   | web,auth     |
+|        | GET|HEAD  | users                  | users            | jeremykenedy\laravelusers\app\Http\Controllers\UsersManagementController@index   | web,auth     |
+|        | GET|HEAD  | users/create           | users.create     | jeremykenedy\laravelusers\app\Http\Controllers\UsersManagementController@create  | web,auth     |
+|        | PUT|PATCH | users/{user}           | users.update     | jeremykenedy\laravelusers\app\Http\Controllers\UsersManagementController@update  | web,auth     |
+|        | DELETE    | users/{user}           | user.destroy     | jeremykenedy\laravelusers\app\Http\Controllers\UsersManagementController@destroy | web,auth     |
+|        | GET|HEAD  | users/{user}           | users.show       | jeremykenedy\laravelusers\app\Http\Controllers\UsersManagementController@show    | web,auth     |
+|        | GET|HEAD  | users/{user}/edit      | users.edit       | jeremykenedy\laravelusers\app\Http\Controllers\UsersManagementController@edit    | web,auth     |
++--------+-----------+------------------------+------------------+----------------------------------------------------------------------------------+--------------+
 ```
 
 ### File Tree
@@ -114,9 +131,11 @@ These can be done with:
 │   ├── filesystems.php
 │   ├── hashing.php
 │   ├── laravelPhpInfo.php
+│   ├── laravelusers.php
 │   ├── logging.php
 │   ├── mail.php
 │   ├── queue.php
+│   ├── roles.php
 │   ├── services.php
 │   ├── session.php
 │   └── view.php
@@ -126,9 +145,18 @@ These can be done with:
 │   │   └── UserFactory.php
 │   ├── migrations
 │   │   ├── 2014_10_12_000000_create_users_table.php
-│   │   └── 2014_10_12_100000_create_password_resets_table.php
+│   │   ├── 2014_10_12_100000_create_password_resets_table.php
+│   │   ├── 2016_01_15_105324_create_roles_table.php
+│   │   ├── 2016_01_15_114412_create_role_user_table.php
+│   │   ├── 2016_01_26_115212_create_permissions_table.php
+│   │   ├── 2016_01_26_115523_create_permission_role_table.php
+│   │   └── 2016_02_09_132439_create_permission_user_table.php
 │   └── seeds
-│       └── DatabaseSeeder.php
+│       ├── ConnectRelationshipsSeeder.php
+│       ├── DatabaseSeeder.php
+│       ├── PermissionsTableSeeder.php
+│       ├── RolesTableSeeder.php
+│       └── UsersTableSeeder.php
 ├── package.json
 ├── phpunit.xml
 ├── public

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5bca48e56bbf3a25645858fcab9c285",
+    "content-hash": "9e316e3642e0887093e3a73badbc1835",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -454,6 +454,120 @@
             "time": "2015-04-20T18:58:01+00:00"
         },
         {
+            "name": "jeremykenedy/laravel-roles",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremykenedy/laravel-roles.git",
+                "reference": "eaf5443d45f8844f6054d503bab8088ed37b6cdb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremykenedy/laravel-roles/zipball/eaf5443d45f8844f6054d503bab8088ed37b6cdb",
+                "reference": "eaf5443d45f8844f6054d503bab8088ed37b6cdb",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.3.*|5.4.*|5.5.*|5.6.*",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "jeremykenedy\\LaravelRoles\\RolesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "jeremykenedy\\LaravelRoles\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Bičan",
+                    "email": "romanbican@seznam.cz"
+                },
+                {
+                    "name": "Jeremy Kenedy",
+                    "email": "jeremykenedy@gmail.com"
+                },
+                {
+                    "name": "Ultraware"
+                }
+            ],
+            "description": "Powerful package for handling roles and permissions in Laravel. Supports Laravel 5.3, 5.4, and 5.5",
+            "keywords": [
+                "acl",
+                "laravel",
+                "levels",
+                "permissions",
+                "roles"
+            ],
+            "time": "2018-02-25T18:37:47+00:00"
+        },
+        {
+            "name": "jeremykenedy/laravel-users",
+            "version": "v3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremykenedy/laravel-users.git",
+                "reference": "e18d88f5ec7b4838ee2a1d8f405baa309229fe85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremykenedy/laravel-users/zipball/e18d88f5ec7b4838ee2a1d8f405baa309229fe85",
+                "reference": "e18d88f5ec7b4838ee2a1d8f405baa309229fe85",
+                "shasum": ""
+            },
+            "require": {
+                "laravelcollective/html": "^5.4|^5.5|^5.6",
+                "php": ">=7.1.3"
+            },
+            "require-dev": {
+                "illuminate/support": "^5.6",
+                "laravel/laravel": "dev-develop",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "jeremykenedy\\laravelusers\\LaravelUsersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "jeremykenedy\\laravelusers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jeremykenedy",
+                    "email": "jeremykenedy@gmail.com"
+                }
+            ],
+            "description": "Laravel Users Management CRUD Package",
+            "keywords": [
+                "Users",
+                "crud",
+                "laravel",
+                "management"
+            ],
+            "time": "2018-02-26T04:51:33+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v5.6.11",
             "source": {
@@ -653,6 +767,74 @@
                 "psysh"
             ],
             "time": "2018-03-06T17:34:36+00:00"
+        },
+        {
+            "name": "laravelcollective/html",
+            "version": "v5.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelCollective/html.git",
+                "reference": "41cd9291a69bd24f2184e504be041348a87308a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/41cd9291a69bd24f2184e504be041348a87308a8",
+                "reference": "41cd9291a69bd24f2184e504be041348a87308a8",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "5.6.*",
+                "illuminate/routing": "5.6.*",
+                "illuminate/session": "5.6.*",
+                "illuminate/support": "5.6.*",
+                "illuminate/view": "5.6.*",
+                "php": ">=7.1.3"
+            },
+            "require-dev": {
+                "illuminate/database": "5.6.*",
+                "mockery/mockery": "~1.0",
+                "phpunit/phpunit": "~5.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.6-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Collective\\Html\\HtmlServiceProvider"
+                    ],
+                    "aliases": {
+                        "Form": "Collective\\Html\\FormFacade",
+                        "Html": "Collective\\Html\\HtmlFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Collective\\Html\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                },
+                {
+                    "name": "Adam Engebretson",
+                    "email": "adam@laravelcollective.com"
+                }
+            ],
+            "description": "HTML and Form Builders for the Laravel Framework",
+            "homepage": "https://laravelcollective.com",
+            "time": "2018-02-12T14:19:42+00:00"
         },
         {
             "name": "league/flysystem",
